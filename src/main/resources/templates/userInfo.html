@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<header>
+    <div>
+        <form th:action="@{/burgerFactory/main}" method="get">
+            <input type="submit" value="Back to main page">
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/}" method="get">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+</header>
+<body>
+<div>
+    <div>
+        <form th:action="@{/burgerFactory/userInfo}" th:object="${userInfo}" method="get">
+            <table>
+                <tr>
+                    <td><h3>username: </h3></td>
+                    <td><div th:text="${userInfo.username}" /></td>
+                </tr>
+                <tr>
+                    <td><h3>e-mail: </h3></td>
+                    <td><div th:text="${userInfo.email}" /></td>
+                </tr>
+                <tr>
+                    <td><h3>phone: </h3></td>
+                    <td><div th:text="${userInfo.phone}" /></td>
+                </tr>
+                <tr>
+                    <td><h3>Password: </h3></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>
+        <span>Edit user data:</span>
+        <input type="checkbox" id="editUserData" onclick="editUserDataForm()" />
+    </div>
+    <div id="editUserDataForm">
+        <form th:action="@{/burgerFactory/userInfo}" th:object="${userInfo}" method="post">
+            <table>
+                <tr>
+                    <td><input type="text" placeholder="New username" th:field="*{username}"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="New e-mail" th:field="*{email}"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="New phone number" th:field="*{phone}"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" placeholder="New password" th:field="*{password}"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Update data">
+        </form>
+    </div>
+</div>
+<script>
+    function editUserDataForm() {
+        var checkBox = document.getElementById("editUserData");
+        var editUserForm = document.getElementById("editUserDataForm");
+        if(checkBox.checked == true) {
+            editUserForm.style.display = "block"
+        } else {
+            editUserForm.style.display = "none"
+        }
+    }
+</script>
+</body>
+<footer></footer>
+</html>
