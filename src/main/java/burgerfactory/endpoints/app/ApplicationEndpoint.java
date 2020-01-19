@@ -16,7 +16,7 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping("/burgerFactory")
-public class ApplicationEndpont {
+public class ApplicationEndpoint {
 
     @Autowired
     private AppFacade appFacade;
@@ -24,8 +24,9 @@ public class ApplicationEndpont {
     private UserService userService;
 
     @GetMapping("/main")
-    public String mainMenu(Model model) {
+    public String mainMenu(Model model, @ModelAttribute("paymentSuccessfulMessage") String paymentSuccessfulMessage) {
         model.addAttribute("order", appFacade.prepareNewOrder((Menu) model.asMap().get("menu")));
+        model.addAttribute("paymentSuccessfulMessage", paymentSuccessfulMessage);
         return "mainPage";
     }
 
@@ -48,8 +49,8 @@ public class ApplicationEndpont {
     }
 
     @PostMapping("/userInfo")
-    public String updateUserInfo (@ModelAttribute("userInfo") UserDto user) {
-        userService.save(user);
+    public String updateUserInfo (Model model, @ModelAttribute("userInfo") UserDto user, Principal principal) {
+        userService.updateUser(user, principal);
         return "/userInfo";
     }
 }

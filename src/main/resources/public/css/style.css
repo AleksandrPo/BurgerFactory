@@ -1,7 +1,230 @@
 body {
-    background-color: grey;
+    background-color: rgb(51, 54, 71);
+}
+
+.divLogo {
+    position: relative;
+    height: 110px;
+}
+
+.divLogo img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100px;
+}
+
+.pageLogo {
+    position: relative;
+    height: 75px;
+}
+
+.pageLogo img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 70px;
+}
+
+.divMenu {
+    position: relative;
+    height: 100px;
+}
+
+.divMenu img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+}
+
+.formTable {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.formTable td {
+    text-align: center;
+    display: block;
+}
+
+.tableMenu {
+    margin-right: auto;
+    margin-left: auto;
+    color: white;
+}
+
+.tableMenu td, .tableMenu th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 200px;
+}
+
+.tableMenu th {
+    font-weight: bold;
+    background-color: green;
+}
+
+.tableMenu tr #totalPrice {
+    font-weight: silver;
+    background-color: silver;
+    width: 100%;
+}
+
+.userInfoTable {
+    margin-right: auto;
+    margin-left: auto;
+    color: yellow;
+    border: 1px solid rgb(51, 54, 71);
+    width: 100%;
+}
+
+.tableMenu td {
+    text-align: center;
+    padding: 10px;
+    width: 33%;
+}
+
+.error {
+    color: rgb(224, 45, 18);
+    font-weight: bold;
+}
+
+.inputField {
+    width: 220px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 .submitBtn {
-    color: rgb(59, 28, 231);
+    width: 220px;
+    height: 30px;
+    color: black;
+    display: block;
+    margin-top: 1px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+}
+
+#modifyUserDataBtn {
+    width: 100%;
+    height: 30px;
+    color: black;
+    display: block;
+    margin-bottom: 4px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+}
+
+#updateUserDataBtn {
+    display: block;
+    width: 100%;
+    height: 30px;
+    color: black;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.imageBtn {
+    height: 60px;
+    display: block;
+    margin-top: 1px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+}
+
+.firstBtn {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.secondBtn {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 70px;
+}
+
+.container {
+    width: 600px;
+    margin: auto;
+}
+
+.container .mainMenuPaymentContainer {
+    margin-top: 14px;
+}
+
+.container .mainMenuPaymentContainer .paymentMethod {
+    float: left;
+}
+
+.container .mainMenuPaymentContainer .calculatePrice {
+    float: right;
+}
+
+.container #divEditUserData {
+    display: block;
+    width: 100%;
+}
+
+.container #editUserDataForm {
+    display: block;
+    width: 100%;
+}
+
+hr {
+    border: 2px solid gold;
+    margin: 2em;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.paymentStrategy {
+    width: 600px;
+}
+
+.paymentStrategy .strategyInputField {
+    display: block;
+    width: 220px;
+    height: 30px;
+    border-radius: 6px;
+    margin-top: 8px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.remitBtn {
+    border: 0 none;
+    float: right;
+}
+
+.declineBtn {
+    border: 0 none;
+    float: left;
+}
+
+header p {
+    text-align: center;
+    color: rgb(0, 255, 0);
+    font-weight: bold;
+}
+
+p.failure {
+    text-align: center;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
+.paymentMethod select {
+    width: 200px;
+    height: 30px;
+    color: black;
+    background-color: rgb(252, 234, 93);
 }

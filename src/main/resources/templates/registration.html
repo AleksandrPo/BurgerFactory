@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration Form</title>
+    <link type="text/css" th:href="@{/css/style.css}" href="../public/css/style.css" rel="stylesheet" />
 </head>
 <body>
+<div class="divLogo">
+    <img src="../img/logo.png" alt="Logo">
+</div>
 <div>
     <form th:action="@{/registration}" th:object="${userForm}" method="post">
-        <table>
+        <table class="formTable">
             <tr>
-                <td><input type="text" placeholder="Username" th:field="*{username}"></td>
-                <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+                <td><input class="inputField" type="text" placeholder="Username" th:field="*{username}"></td>
+                <td class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
 
-                <td><input type="password" placeholder="Password" th:field="*{password}"></td>
-                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+                <td><input class="inputField" type="password" placeholder="Password" th:field="*{password}"></td>
+                <td class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
 
-                <td><input type="password" placeholder="Confirm password" th:field="*{confirmPassword}"></td>
-                <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></td>
+                <td><input class="inputField" type="password" placeholder="Confirm password" th:field="*{confirmPassword}"></td>
+                <td class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></td>
 
-                <td><input type="text" placeholder="Email" th:field="*{email}"></td>
-                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+                <td><input class="inputField" type="text" placeholder="Email" th:field="*{email}"></td>
+                <td class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 
-                <td><input type="number" placeholder="Phone" th:field="*{phone}"></td>
-                <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
+                <td><input class="inputField" type="number" placeholder="Phone" th:field="*{phone}"></td>
+                <td class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
             </tr>
         </table>
         <div>
-            <input type="submit" value="Create">
+            <input class="submitBtn" type="submit" value="Create">
         </div>
     </form>
     <form th:action="@{/login}" method="get">
-        <input type="submit" value="Cancel">
+        <input class="submitBtn" type="submit" value="Cancel">
     </form>
 </div>
 </body>

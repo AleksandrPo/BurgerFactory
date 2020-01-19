@@ -1,5 +1,6 @@
 package burgerfactory.infrastructure.mapper;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
@@ -9,6 +10,7 @@ public abstract class AbstractMapper<S, D> implements Mapper<S, D> {
 
     public AbstractMapper() {
         this.modelMapper = new ModelMapper();
+        this.modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 

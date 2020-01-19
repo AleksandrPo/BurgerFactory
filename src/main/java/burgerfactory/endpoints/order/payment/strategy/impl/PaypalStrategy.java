@@ -1,6 +1,8 @@
 package burgerfactory.endpoints.order.payment.strategy.impl;
 
 import burgerfactory.endpoints.order.payment.strategy.PaymentStrategy;
+import burgerfactory.infrastructure.messages.Messages;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class PaypalStrategy implements PaymentStrategy {
 
@@ -13,11 +15,17 @@ public class PaypalStrategy implements PaymentStrategy {
     }
 
     @Override
-    public String pay(float amount) {
-        return validatePaypalAccount() ? "SUCCESS" : "FAILED";
+    public String pay(float amount, RedirectAttributes redirectAttributes) {
+        if (isPaypalAccountValid()) {
+            redirectAttributes.addFlashAttribute("paymentSuccessfulMessage", Messages.PAYMENT_SUCCESSFUL.message);
+            return "redirect:/burgerFactory/main";
+        } else {
+            redirectAttributes.addFlashAttribute("paymentFailureMessage", Messages.PAYMENT_STRATEGY_FAILURE.message);
+            return "redirect:/order/getInvoice";
+        }
     }
 
-    private boolean validatePaypalAccount() {
+    private boolean isPaypalAccountValid() {
         return email != null
                 && email.contains("@")
                 && email.contains(".")

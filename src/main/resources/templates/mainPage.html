@@ -2,122 +2,122 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link type="text/css" th:href="@{/css/style.css}" href="../public/css/style.css" rel="stylesheet" />
     <title>Main page</title>
 </head>
 <header>
-    <span>
+    <div class="pageLogo">
+        <img src="../img/logo.png" alt="Logo">
+    </div>
+    <span class="secondBtn">
         <form th:action="@{/burgerFactory/userInfo}" method="get">
-            <input type="submit" value="User Info">
+            <input class="imageBtn" type="image" src="../img/userInfo.png" value="User Info">
         </form>
     </span>
-    <span>
+    <span class="firstBtn">
         <form th:action="@{/logout}" method="get">
-            <input type="submit" value="Sign Out">
+            <input class="imageBtn" type="image" src="../img/signOut.png" value="Sign Out">
         </form>
     </span>
+    <p th:text="${paymentSuccessfulMessage}"></p>
+    <p class="failure" th:text="${paymentFailureMessage}"></p>
 </header>
 <body>
 <div>
-    <h3>BURGER FACTORY MENU</h3>
-    <form th:action="@{/burgerFactory/calculateTotalPrice}" th:object="${order}" th:method="post">
-        <div th:if="${menu != null}">
-            <table th:if="${menu.burgersMenu != null and #lists.size(menu.burgersMenu) > 0}">
-                <thead>
-                    <tr>
-                        <th>Burger</th>
-                        <th>Price</th>
-                        <th>QTY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="burger, stat : ${menu.burgersMenu}">
-                        <td>
-                            <span th:text="${burger.name}"></span>
-                            <input type="hidden" value="${burger.name}" th:field="*{burgers[__${stat.index}__].name}" />
-                        </td>
-                        <td>
-                            <span th:text="${burger.price}"></span>
-                            <input type="hidden" value="${burger.price}" th:field="*{burgers[__${stat.index}__].price}" />
-                        </td>
-                        <td>
-                            <input type="number" value="${burger.qty}" min="0" th:field="*{burgers[__${stat.index}__].qty}" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="divMenu">
+        <img src="../img/menu.png">
+    </div>
+    <div class="container">
+        <form th:action="@{/burgerFactory/calculateTotalPrice}" th:object="${order}" th:method="post">
+            <div th:if="${menu != null}">
+                <table class="tableMenu" th:if="${menu.burgersMenu != null and #lists.size(menu.burgersMenu) > 0}">
+                    <thead>
+                        <tr>
+                            <th>Burger</th>
+                            <th>Price</th>
+                            <th>QTY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="burger, stat : ${menu.burgersMenu}">
+                            <td>
+                                <span th:text="${burger.name}"></span>
+                                <input type="hidden" value="${burger.name}" th:field="*{burgers[__${stat.index}__].name}" />
+                            </td>
+                            <td>
+                                <span th:text="${burger.price}"></span>
+                                <input type="hidden" value="${burger.price}" th:field="*{burgers[__${stat.index}__].price}" />
+                            </td>
+                            <td>
+                                <input type="number" value="${burger.qty}" min="0" th:field="*{burgers[__${stat.index}__].qty}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table th:if="${menu.drinksMenu != null and #lists.size(menu.drinksMenu) > 0}">
-                <thead>
-                    <tr>
-                        <th>Drink</th>
-                        <th>Price</th>
-                        <th>QTY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="drink, stat : ${menu.drinksMenu}">
-                        <td>
-                            <span th:text="${drink.name}"></span>
-                            <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].name}" />
-                        </td>
-                        <td>
-                            <span th:text="${drink.price}"></span>
-                            <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].price}" />
-                        </td>
-                        <td>
-                            <input type="number" value="${drink.qty}" min="0" th:field="*{drinks[__${stat.index}__].qty}" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="tableMenu" th:if="${menu.drinksMenu != null and #lists.size(menu.drinksMenu) > 0}">
+                    <thead>
+                        <tr>
+                            <th>Drink</th>
+                            <th>Price</th>
+                            <th>QTY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="drink, stat : ${menu.drinksMenu}">
+                            <td>
+                                <span th:text="${drink.name}"></span>
+                                <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].name}" />
+                            </td>
+                            <td>
+                                <span th:text="${drink.price}"></span>
+                                <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].price}" />
+                            </td>
+                            <td>
+                                <input type="number" value="${drink.qty}" min="0" th:field="*{drinks[__${stat.index}__].qty}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table th:if="${menu.potatoFreesMenu != null and #lists.size(menu.potatoFreesMenu) > 0}">
-                <thead>
-                    <tr>
-                        <th>Potato</th>
-                        <th>Price</th>
-                        <th>QTY</th>
+                <table class="tableMenu" th:if="${menu.potatoFreesMenu != null and #lists.size(menu.potatoFreesMenu) > 0}">
+                    <thead>
+                        <tr>
+                            <th>Potato</th>
+                            <th>Price</th>
+                            <th>QTY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="potato, stat : ${menu.potatoFreesMenu}">
+                        <td>
+                            <span th:text="${potato.potatoSize}"></span>
+                            <input type="hidden" value="${potato.potatoSize}" th:field="*{potatoFrees[__${stat.index}__].potatoSize}" />
+                        </td>
+                        <td>
+                            <span th:text="${potato.price}"></span>
+                            <input type="hidden" value="${potato.price}" th:field="*{potatoFrees[__${stat.index}__].price}" />
+                        </td>
+                        <td>
+                            <input type="number" value="${potato.qty}" min="0" th:field="*{potatoFrees[__${stat.index}__].qty}" />
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                <tr th:each="potato, stat : ${menu.potatoFreesMenu}">
-                    <td>
-                        <span th:text="${potato.potatoSize}"></span>
-                        <input type="hidden" value="${potato.potatoSize}" th:field="*{potatoFrees[__${stat.index}__].potatoSize}" />
-                    </td>
-                    <td>
-                        <span th:text="${potato.price}"></span>
-                        <input type="hidden" value="${potato.price}" th:field="*{potatoFrees[__${stat.index}__].price}" />
-                    </td>
-                    <td>
-                        <input type="number" value="${potato.qty}" min="0" th:field="*{potatoFrees[__${stat.index}__].qty}" />
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <div><h4>Select Payment Method</h4></div>
-            <select th:field="*{paymentStrategy.strategy}">
-                <option value="null">Choose payment method...</option>
-                <option value="CREDIT_CARD">Credit Card</option>
-                <option value="PAYPAL">Paypal</option>
-            </select>
-        </div>
-        <div>
-            <input type="submit" value="Calculate price" />
-        </div>
-    </form>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mainMenuPaymentContainer">
+                <div class="paymentMethod">
+                    <select th:field="*{paymentStrategy.strategy}">
+                        <option value="CREDIT_CARD">Credit Card</option>
+                        <option value="PAYPAL">Paypal</option>
+                    </select>
+                </div>
+                <div class="calculatePrice">
+                    <input class="submitBtn" type="submit" value="Calculate price" />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-<script type="text/javascript">
-    var burgers = 0;
-    function changeNumberOfBurgers(i) {
-        var burgersQTY = document.getElementById("burgersQTY");
-        burgers = burgers + i;
-        burgersQTY.innerHTML = burgers;
-    }
-</script>
 </body>
-<footer>FOOTER</footer>
 </html>

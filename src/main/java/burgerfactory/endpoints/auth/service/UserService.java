@@ -2,10 +2,11 @@ package burgerfactory.endpoints.auth.service;
 
 import burgerfactory.endpoints.auth.dto.UserDto;
 
+import java.security.Principal;
+
 public interface UserService {
-    UserDto save(UserDto u);
-    UserDto updateUser(UserDto u);
-    void deleteUser(UserDto u);
+    void save(UserDto u);
+    UserDto updateUser(UserDto u, Principal principal);
     UserDto findByUsername(String username);
-    String getUsername(String username);
+    Boolean isRegisteredUser(String username);
 }

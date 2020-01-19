@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" th:href="@{/css/style.css}" href="../public/css/style.css" rel="stylesheet" />
     <title>Order</title>
 </head>
 <body>
-<div>
+<div class="container">
     <form th:action="@{/order/approveAndPay}" th:object="${invoice}" th:method="post">
         <div th:if="${invoice != null}">
-            <table>
+            <table class="tableMenu">
                 <thead>
                     <tr>
                         <th>Item</th>
@@ -23,12 +24,12 @@
                             <input type="hidden" value="${burger.name}" th:field="*{burgers[__${stat.index}__].name}" />
                         </td>
                         <td>
-                            <span th:text="${burger.price}"></span>
-                            <input type="hidden" value="${burger.price}" th:field="*{burgers[__${stat.index}__].price}" />
-                        </td>
-                        <td>
                             <span th:text="${burger.qty}"></span>
                             <input type="hidden" value="${burger.qty}" th:field="*{burgers[__${stat.index}__].qty}" />
+                        </td>
+                        <td>
+                            <span th:text="${burger.price}"></span>
+                            <input type="hidden" value="${burger.price}" th:field="*{burgers[__${stat.index}__].price}" />
                         </td>
                     </tr>
                 </tbody>
@@ -39,12 +40,12 @@
                             <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].name}" />
                         </td>
                         <td>
-                            <span th:text="${drink.price}"></span>
-                            <input type="hidden" value="${drink.name}" th:field="*{drinks[__${stat.index}__].price}" />
-                        </td>
-                        <td>
                             <span th:text="${drink.qty}"></span>
                             <input type="hidden" value="${drink.qty}" th:field="*{drinks[__${stat.index}__].qty}" />
+                        </td>
+                        <td>
+                            <span th:text="${drink.price}"></span>
+                            <input type="hidden" value="${drink.price}" th:field="*{drinks[__${stat.index}__].price}" />
                         </td>
                     </tr>
                 </tbody>
@@ -55,41 +56,49 @@
                             <input type="hidden" value="${potato.potatoSize}" th:field="*{potatoFrees[__${stat.index}__].potatoSize}" />
                         </td>
                         <td>
-                            <span th:text="${potato.price}"></span>
-                            <input type="hidden" value="${potato.price}" th:field="*{potatoFrees[__${stat.index}__].price}" />
-                        </td>
-                        <td>
                             <span th:text="${potato.qty}"></span>
                             <input type="hidden" value="${potato.qty}" min="0" th:field="*{potatoFrees[__${stat.index}__].qty}" />
+                        </td>
+                        <td>
+                            <span th:text="${potato.price}"></span>
+                            <input type="hidden" value="${potato.price}" th:field="*{potatoFrees[__${stat.index}__].price}" />
                         </td>
                     </tr>
                 </tbody>
                 <tr>
-                    <td>
+                    <td></td>
+                    <td></td>
+                    <td id="totalPrice">
                         <span>Total price: </span>
                         <span th:text="${invoice.totalPrice}"></span>
                     </td>
                 </tr>
             </table>
         </div>
-        <div th:if="${invoice.paymentStrategy.strategy != null}">
+        <hr>
+        <div th:if="${paymentFailureMessage}">
+            <p class="failure" th:text="${paymentFailureMessage}"></p>
+            <hr>
+        </div>
+        <div class="paymentStrategy" th:if="${invoice.paymentStrategy != null}">
             <input type="hidden" value="paymentStrategy.strategy" th:field="*{paymentStrategy.strategy}" />
             <div th:if="${invoice.paymentStrategy.strategy == 'CREDIT_CARD'}">
-                <input type="text" placeholder="First Name" th:field="*{paymentStrategy.firstName}" />
-                <input type="text" placeholder="Last Name" th:field="*{paymentStrategy.lastName}" />
-                <input type="number" value="0" th:field="*{paymentStrategy.cardNumber}" />
-                <input type="text" placeholder="dd/M/yyyy" th:field="*{paymentStrategy.expirationDate}" />
-                <input type="number" value="0" min="0" max="999" th:field="*{paymentStrategy.cvcCode}" />
+                <input class="strategyInputField" type="text" placeholder="First Name" th:field="*{paymentStrategy.firstName}" />
+                <input class="strategyInputField" type="text" placeholder="Last Name" th:field="*{paymentStrategy.lastName}" />
+                <input class="strategyInputField" type="number" placeholder="Card Number" value="0" th:field="*{paymentStrategy.cardNumber}" />
+                <input class="strategyInputField" type="text" placeholder="dd/M/yyyy" th:field="*{paymentStrategy.expirationDate}" />
+                <input class="strategyInputField" type="number" placeholder="CVC Code" value="0" min="0" max="999" th:field="*{paymentStrategy.cvcCode}" />
             </div>
             <div th:if="${invoice.paymentStrategy.strategy == 'PAYPAL'}">
-                <input type="text" placeholder="E-mail" th:field="*{paymentStrategy.email}" />
-                <input type="text" placeholder="Password" th:field="*{paymentStrategy.password}" />
+                <input class="strategyInputField" type="text" placeholder="E-mail" th:field="*{paymentStrategy.email}" />
+                <input class="strategyInputField" type="password" placeholder="Password" th:field="*{paymentStrategy.password}" />
             </div>
         </div>
-        <div><input type="submit" value="Remit payment" /></div>
+        <hr>
+        <div class="remitBtn"><input class="submitBtn" type="submit" value="Remit payment" /></div>
     </form>
     <form th:action="@{/order/decline}" th:method="get">
-        <div><input type="submit" value="Decline payment" /></div>
+        <div class="declineBtn"><input class="submitBtn" type="submit" value="Decline payment" /></div>
     </form>
 </div>
 </body>

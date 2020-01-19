@@ -13,7 +13,7 @@ public class Burger {
     private Long id;
     private String name;
     private float price;
-    private Integer qty;
+    private short qty;
 
     @ManyToOne
     @JoinColumn(name = "burger_menu")
@@ -65,11 +65,11 @@ public class Burger {
         this.burgerMenu = burgerMenu;
     }
 
-    public Integer getQty() {
+    public short getQty() {
         return qty;
     }
 
-    public void setQty(Integer qty) {
+    public void setQty(short qty) {
         this.qty = qty;
     }
 

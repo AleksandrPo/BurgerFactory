@@ -1,8 +1,7 @@
 package burgerfactory.endpoints.app.configuration;
 
-import burgerfactory.endpoints.app.facade.AppFacade;
+import burgerfactory.endpoints.auth.dao.impl.UserDaoImpl;
 import burgerfactory.endpoints.app.facade.impl.AppFacadeImpl;
-import burgerfactory.endpoints.app.service.AppService;
 import burgerfactory.endpoints.app.service.impl.AppServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,5 +17,10 @@ public class AppConfiguration {
     @Bean
     public AppServiceImpl appService() {
         return new AppServiceImpl();
+    }
+
+    @Bean
+    public UserDaoImpl persistence() {
+        return new UserDaoImpl();
     }
 }

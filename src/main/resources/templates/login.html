@@ -2,19 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link type="text/css" th:href="@{/css/style.css}" href="../public/css/style.css" rel="stylesheet" />
     <title>Login</title>
 </head>
 <body>
+<div class="divLogo">
+    <img src="../img/logo.png" alt="Logo">
+</div>
 <div>
     <form th:action="@{/login}" method="post">
-        <table>
+        <table class="formTable">
             <tr>
                 <td>
-                    <input type="text" placeholder="Username" name="username">
+                    <input class="inputField" type="text" placeholder="Username" name="username">
                 </td>
                 <td>
-                    <input type="password" placeholder="Password" name="password">
+                    <input class="inputField" type="password" placeholder="Password" name="password">
                 </td>
             </tr>
         </table>

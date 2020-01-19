@@ -2,75 +2,74 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" th:href="@{/css/style.css}" href="../public/css/style.css" rel="stylesheet" />
     <title>User Info</title>
 </head>
 <header>
-    <div>
+    <div class="pageLogo">
+        <img src="../img/userInfo.png" alt="Logo">
+    </div>
+    <span class="secondBtn">
         <form th:action="@{/burgerFactory/main}" method="get">
-            <input type="submit" value="Back to main page">
+            <input class="imageBtn" type="image" src="../img/logo.png" value="Back to menu">
         </form>
-    </div>
-    <div>
-        <form th:action="@{/}" method="get">
-            <input type="submit" value="Logout">
+    </span>
+    <span class="firstBtn">
+        <form th:action="@{/logout}" method="get">
+            <input class="imageBtn" type="image" src="../img/signOut.png" value="Sign Out">
         </form>
-    </div>
+    </span>
 </header>
 <body>
-<div>
-    <div>
-        <form th:action="@{/burgerFactory/userInfo}" th:object="${userInfo}" method="get">
-            <table>
-                <tr>
-                    <td><h3>username: </h3></td>
-                    <td><div th:text="${userInfo.username}" /></td>
-                </tr>
-                <tr>
-                    <td><h3>e-mail: </h3></td>
-                    <td><div th:text="${userInfo.email}" /></td>
-                </tr>
-                <tr>
-                    <td><h3>phone: </h3></td>
-                    <td><div th:text="${userInfo.phone}" /></td>
-                </tr>
-                <tr>
-                    <td><h3>Password: </h3></td>
-                </tr>
-            </table>
-        </form>
+<div class="container">
+    <div id="divEditUserData">
+        <input id="modifyUserDataBtn" type="button" onclick="editUserDataForm()" value="EDIT USER DATA" />
     </div>
-    <div>
-        <span>Edit user data:</span>
-        <input type="checkbox" id="editUserData" onclick="editUserDataForm()" />
-    </div>
+    <hr>
     <div id="editUserDataForm">
         <form th:action="@{/burgerFactory/userInfo}" th:object="${userInfo}" method="post">
-            <table>
-                <tr>
-                    <td><input type="text" placeholder="New username" th:field="*{username}"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" placeholder="New e-mail" th:field="*{email}"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" placeholder="New phone number" th:field="*{phone}"></td>
-                </tr>
-                <tr>
-                    <td><input type="password" placeholder="New password" th:field="*{password}"></td>
-                </tr>
+            <table class="userInfoTable">
+                <tbody>
+                    <tr>
+                        <td><h3>USERNAME</h3></td>
+                        <td><span th:text="${userInfo.username}"></span></td>
+                        <td><input class="showHideUserInfo" type="text" placeholder="New username" th:field="*{username}" style="display:none"></td>
+                    </tr>
+                    <tr>
+                        <td><h3>E-MAIL</h3></td>
+                        <td><span th:text="${userInfo.email}"></span></td>
+                        <td><input class="showHideUserInfo" type="text" placeholder="New e-mail" th:field="*{email}" style="display:none"></td>
+                    </tr>
+                    <tr>
+                        <td><h3>PHONE</h3></td>
+                        <td><span th:text="${userInfo.phone}"></span></td>
+                        <td><input class="showHideUserInfo" type="text" placeholder="New phone number" th:field="*{phone}" style="display:none"></td>
+                    </tr>
+                    <tr>
+                        <td><h3>PASSWORD</h3></td>
+                        <td>---</td>
+                        <td><input class="showHideUserInfo"  type="password" placeholder="New password" th:field="*{password}" style="display:none"></td>
+                    </tr>
+                </tbody>
             </table>
-            <input type="submit" value="Update data">
+            <div class="showHideUserInfo" style="display:none">
+                <hr>
+                <input id="updateUserDataBtn" type="submit" value="Confirm" />
+            </div>
         </form>
     </div>
 </div>
 <script>
     function editUserDataForm() {
-        var checkBox = document.getElementById("editUserData");
-        var editUserForm = document.getElementById("editUserDataForm");
-        if(checkBox.checked == true) {
-            editUserForm.style.display = "block"
+        var elements = document.getElementsByClassName("showHideUserInfo");
+        if (elements[0].style.display === 'none') {
+            for (var i=0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
         } else {
-            editUserForm.style.display = "none"
+            for (var i=0; i < elements.length; i++) {
+                elements[i].style.display = 'none';
+            }
         }
     }
 </script>
