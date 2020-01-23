@@ -8,5 +8,4 @@ public interface UserService {
     void save(UserDto u);
     UserDto updateUser(UserDto u, Principal principal);
     UserDto findByUsername(String username);
-    Boolean isRegisteredUser(String username);
 }

@@ -1,7 +1,7 @@
 package burgerfactory.endpoints.order.payment.strategy.impl;
 
 import burgerfactory.endpoints.order.payment.strategy.PaymentStrategy;
-import burgerfactory.infrastructure.messages.Messages;
+import burgerfactory.infrastructure.enums.Messages;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class CreditCardStrategy implements PaymentStrategy {
@@ -33,9 +33,6 @@ public class CreditCardStrategy implements PaymentStrategy {
         private Long cardNumber;
         private String expirationDate;
         private Short cvcCode;
-
-        public Builder() {
-        }
 
         public Builder setFirstname(String firstname) {
             this.firstname = firstname;
@@ -79,45 +76,5 @@ public class CreditCardStrategy implements PaymentStrategy {
                 && cardNumber != null
                 && expirationDate != null
                 && cvcCode != null;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    private void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    private void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Long getCardNumber() {
-        return cardNumber;
-    }
-
-    private void setCardNumber(Long cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    private void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public Short getCvcCode() {
-        return cvcCode;
-    }
-
-    private void setCvcCode(Short cvcCode) {
-        this.cvcCode = cvcCode;
     }
 }

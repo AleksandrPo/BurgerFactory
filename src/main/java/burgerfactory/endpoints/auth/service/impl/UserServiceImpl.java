@@ -1,7 +1,6 @@
 package burgerfactory.endpoints.auth.service.impl;
 
 import burgerfactory.endpoints.auth.dao.impl.UserDaoImpl;
-import burgerfactory.endpoints.auth.dao.UserDao;
 import burgerfactory.endpoints.auth.dto.UserDto;
 import burgerfactory.endpoints.auth.mapper.UserDtoToUserMapper;
 import burgerfactory.endpoints.auth.mapper.UserToUserDtoMapper;
@@ -16,8 +15,6 @@ import java.security.Principal;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDao userDao;
     @Autowired
     private UserDtoToUserMapper userDtoToUserMapper;
     @Autowired
@@ -43,12 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByUsername(String username) {
-        User user = userDao.findUserByUsername(username);
+        User user = userDaoImpl.findUserByUsername(username);
         return user == null ? null : userToUserDtoMapper.map(user);
-    }
-
-    @Override
-    public Boolean isRegisteredUser(String username) {
-        return userDao.findUserByUsername(username) != null;
     }
 }

@@ -1,7 +1,7 @@
 package burgerfactory.endpoints.order;
 
 import burgerfactory.endpoints.order.dto.OrderDto;
-import burgerfactory.endpoints.order.facade.impl.OrderFacadeImpl;
+import burgerfactory.endpoints.order.facade.OrderFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.security.Principal;
 public class OrderEndpoint {
 
     @Autowired
-    private OrderFacadeImpl orderFacade;
+    private OrderFacade orderFacade;
 
     @GetMapping("/")
     public String getOrderPage() {
@@ -24,7 +24,7 @@ public class OrderEndpoint {
 
     @GetMapping("/getInvoice")
     public String getInvoice(Model model, @ModelAttribute("invoice") OrderDto invoice, Principal principal) {
-        model.addAttribute("invoice", orderFacade.getInvoice(invoice, principal));
+        model.addAttribute("invoice", orderFacade.getInvoice(invoice));
         return "/orderPage";
     }
 

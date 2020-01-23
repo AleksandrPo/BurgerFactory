@@ -12,7 +12,8 @@ import org.springframework.validation.Validator;
 public class UserValidator implements Validator {
 
     private static final String CANNOT_BE_EMPTY = "CannotBeEmpty";
-    private Errors errors;
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
 
     @Autowired
     private UserService userService;
@@ -26,21 +27,21 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UserDto user = (UserDto) target;
 
-        ValidationUtils.rejectIfEmpty(errors, "username", CANNOT_BE_EMPTY);
+        ValidationUtils.rejectIfEmpty(errors, USERNAME, CANNOT_BE_EMPTY);
         if(user.getUsername().length() < 4 || user.getUsername().length() > 16) {
-            errors.rejectValue("username", "Size.userForm.username");
+            errors.rejectValue(USERNAME, "Size.userForm.username");
         }
         if(userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+            errors.rejectValue(USERNAME, "Duplicate.userForm.username");
         }
 
-        ValidationUtils.rejectIfEmpty(errors, "password", CANNOT_BE_EMPTY);
+        ValidationUtils.rejectIfEmpty(errors, PASSWORD, CANNOT_BE_EMPTY);
         ValidationUtils.rejectIfEmpty(errors, "confirmPassword", CANNOT_BE_EMPTY);
         if(user.getPassword().length() < 4 || user.getPassword().length() > 16) {
-            errors.rejectValue("password", "Size.userForm.password");
+            errors.rejectValue(PASSWORD, "Size.userForm.password");
         }
         if(!user.getPassword().equals(user.getConfirmPassword())) {
-            errors.rejectValue("password", "Diff.userForm.confirmPassword");
+            errors.rejectValue(PASSWORD, "Diff.userForm.confirmPassword");
         }
 
         ValidationUtils.rejectIfEmpty(errors, "email", CANNOT_BE_EMPTY);

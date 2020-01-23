@@ -1,4 +1,4 @@
-package burgerfactory.infrastructure.messages;
+package burgerfactory.infrastructure.enums;
 
 public enum  Messages {
     PAYMENT_SUCCESSFUL("YOUR ORDER APPROVED AND IS ALREADY ON THE WAY TO YOU"),

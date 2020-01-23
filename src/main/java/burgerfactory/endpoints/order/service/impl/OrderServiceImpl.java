@@ -4,11 +4,13 @@ import burgerfactory.endpoints.app.model.Burger;
 import burgerfactory.endpoints.app.model.Drink;
 import burgerfactory.endpoints.app.model.PotatoFree;
 import burgerfactory.endpoints.order.dto.OrderDto;
+import burgerfactory.endpoints.order.dto.StrategyDto;
+import burgerfactory.endpoints.order.factory.PaymentFactory;
 import burgerfactory.endpoints.order.payment.strategy.PaymentStrategy;
-import burgerfactory.endpoints.order.payment.strategy.impl.CreditCardStrategy;
-import burgerfactory.endpoints.order.payment.strategy.impl.PaypalStrategy;
 import burgerfactory.endpoints.order.service.OrderService;
-import burgerfactory.infrastructure.messages.Messages;
+import burgerfactory.infrastructure.enums.Messages;
+import burgerfactory.infrastructure.enums.Variables;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,6 +19,9 @@ import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    @Autowired
+    private PaymentFactory paymentFactory;
 
     @Override
     public float calculateTotalPrice(OrderDto order) {
@@ -27,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String remitPayment(OrderDto invoice, RedirectAttributes redirectAttributes) {
-        String selectedPaymentStrategy = Optional.of(invoice.getPaymentStrategy().getStrategy()).orElse("");
+        String selectedPaymentStrategy = Optional.of(invoice).map(OrderDto::getPaymentStrategy).map(StrategyDto::getStrategy).orElse("");
         if (isInvoiceEmpty(invoice)) {
             return getFailureRedirectPage(Messages.PRODUCT_NOT_SELECTED.message, invoice, redirectAttributes);
         }
@@ -45,13 +50,7 @@ public class OrderServiceImpl implements OrderService {
     private String selectPaymentStrategyAndPay(String selectedPaymentStrategy, OrderDto invoice, RedirectAttributes redirectAttributes) {
         PaymentStrategy paymentStrategy;
         try {
-            if (selectedPaymentStrategy.equals("CREDIT_CARD")) {
-                paymentStrategy = useCreditCardStrategy(invoice, redirectAttributes);
-            } else if (selectedPaymentStrategy.equals("PAYPAL")) {
-                paymentStrategy = usePaypalStrategy(invoice, redirectAttributes);
-            } else {
-                paymentStrategy = null;
-            }
+            paymentStrategy = paymentFactory.getPaymentStrategy(selectedPaymentStrategy, invoice, redirectAttributes);
         } catch (NullPointerException e) {
             return getFailureRedirectPage(Messages.PAYMENT_STRATEGY_FAILURE.message, invoice, redirectAttributes);
         }
@@ -68,25 +67,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private String getFailureRedirectPage(String message, OrderDto invoice, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("invoice", invoice);
+        redirectAttributes.addFlashAttribute(Variables.INVOICE.get, invoice);
         redirectAttributes.addFlashAttribute("paymentFailureMessage", message);
         return Messages.PAYMENT_STRATEGY_FAILURE.message.equals(message) ? "redirect:/order/getInvoice" : "redirect:/burgerFactory/main";
-    }
-
-    private PaymentStrategy useCreditCardStrategy(OrderDto invoice, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("invoice", invoice);
-        return new CreditCardStrategy.Builder()
-                .setFirstname(invoice.getPaymentStrategy().getFirstName())
-                .setLastname(invoice.getPaymentStrategy().getLastName())
-                .setCardNumber(invoice.getPaymentStrategy().getCardNumber())
-                .setExpirationDate(invoice.getPaymentStrategy().getExpirationDate())
-                .setCvcCode(invoice.getPaymentStrategy().getCvcCode())
-                .build();
-    }
-
-    private PaymentStrategy usePaypalStrategy(OrderDto invoice, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("invoice", invoice);
-        return new PaypalStrategy(invoice.getPaymentStrategy().getEmail(), invoice.getPaymentStrategy().getPassword());
     }
 
     private float getBurgerTotalPrice(List<Burger> burgers) {

@@ -1,7 +1,7 @@
 package burgerfactory.endpoints.order.payment.strategy.impl;
 
 import burgerfactory.endpoints.order.payment.strategy.PaymentStrategy;
-import burgerfactory.infrastructure.messages.Messages;
+import burgerfactory.infrastructure.enums.Messages;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class PaypalStrategy implements PaymentStrategy {

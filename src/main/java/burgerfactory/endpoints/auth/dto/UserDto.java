@@ -1,19 +1,19 @@
 package burgerfactory.endpoints.auth.dto;
 
 public class UserDto {
-    private Long id;
+    private Long userId;
     private String username;
     private String password;
     private String confirmPassword;
     private String email;
     private Integer phone;
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

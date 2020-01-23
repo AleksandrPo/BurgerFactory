@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private String phone;
+    private Integer phone;
 
     @OneToMany(mappedBy = "user")
     private Set<Order> orders;
@@ -51,11 +51,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
