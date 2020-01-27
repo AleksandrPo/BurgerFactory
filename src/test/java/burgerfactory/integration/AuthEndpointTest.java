@@ -52,7 +52,7 @@ public class AuthEndpointTest {
 
         mockMvc.perform(get("/registration"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/registration"));
+                .andExpect(view().name("registration"));
 
         mockMvc.perform(post("/registration").flashAttr("userForm", userDto))
                 .andExpect(view().name("registration"))
