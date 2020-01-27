@@ -33,6 +33,7 @@ public class SecurityServiceImpl implements SecurityService {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void refresh(UserDto userDto) {
         Collection<SimpleGrantedAuthority> nowAuthorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder
