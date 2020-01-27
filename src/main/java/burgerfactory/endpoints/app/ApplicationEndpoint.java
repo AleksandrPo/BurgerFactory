@@ -2,6 +2,7 @@ package burgerfactory.endpoints.app;
 
 import burgerfactory.endpoints.app.facade.AppFacade;
 import burgerfactory.endpoints.auth.dto.UserDto;
+import burgerfactory.endpoints.auth.service.SecurityService;
 import burgerfactory.endpoints.auth.service.UserService;
 import burgerfactory.endpoints.app.model.*;
 import burgerfactory.endpoints.order.dto.OrderDto;
@@ -22,6 +23,8 @@ public class ApplicationEndpoint {
     private AppFacade appFacade;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SecurityService securityService;
 
     @GetMapping("/main")
     public String mainMenu(Model model, @ModelAttribute("paymentSuccessfulMessage") String paymentSuccessfulMessage) {
@@ -49,8 +52,8 @@ public class ApplicationEndpoint {
     }
 
     @PostMapping("/userInfo")
-    public String updateUserInfo (Model model, @ModelAttribute("userInfo") UserDto user, Principal principal) {
-        userService.updateUser(user, principal);
+    public String updateUserInfo(Model model, @ModelAttribute("userInfo") UserDto user, Principal principal) {
+        securityService.refresh(userService.updateUser(user, principal));
         return "/userInfo";
     }
 }

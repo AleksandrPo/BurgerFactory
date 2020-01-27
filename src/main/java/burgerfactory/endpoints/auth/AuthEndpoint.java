@@ -47,6 +47,6 @@ public class AuthEndpoint {
 
         securityService.autoLogin(user.getUsername(), user.getPassword());
 
-        return "redirect:/burgerFactory/main";
+        return "redirect:/login";
     }
 }

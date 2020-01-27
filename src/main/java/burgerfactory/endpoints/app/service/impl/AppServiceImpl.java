@@ -25,6 +25,7 @@ public class AppServiceImpl implements AppService {
             order.setDrinks(menu.getDrinksMenu());
             order.setPotatoFrees(menu.getPotatoFreesMenu());
             order.setPaymentStrategy(new StrategyDto());
+            order.getPaymentStrategy().setStrategy("PAYPAL");
         }
         return order;
     }

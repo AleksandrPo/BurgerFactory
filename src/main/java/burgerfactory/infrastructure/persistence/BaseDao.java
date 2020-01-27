@@ -1,6 +1,5 @@
 package burgerfactory.infrastructure.persistence;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 @Repository
-public abstract class BaseDao<ENTITY, ID> /*implements CrudRepository<ENTITY, ID> */{
+public abstract class BaseDao<ENTITY, ID> {
 
     protected Class<ENTITY> entityClass;
 

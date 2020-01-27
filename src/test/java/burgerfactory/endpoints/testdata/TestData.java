@@ -94,12 +94,13 @@ public class TestData {
 
     private static List<Burger> getBurgerList() {
         List<Burger> burgers = new ArrayList<>();
-        burgers.add(addBurger(5.5f, (short) 2));
+        burgers.add(addBurger("Burger_1",5.5f, (short) 2));
         return burgers;
     }
 
-    private static Burger addBurger(float burgerPrice, short qty) {
+    private static Burger addBurger(String name, float burgerPrice, short qty) {
         Burger burger = new Burger();
+        burger.setName(name);
         burger.setPrice(burgerPrice);
         burger.setQty(qty);
         return burger;
@@ -107,13 +108,14 @@ public class TestData {
 
     private static List<Drink> getDrinkList() {
         List<Drink> drinks = new ArrayList<>();
-        drinks.add(addDrink(2.5f, (short) 1));
-        drinks.add(addDrink(1.5f, (short) 1));
+        drinks.add(addDrink("Cola", 2.5f, (short) 1));
+        drinks.add(addDrink("Fanta", 1.5f, (short) 1));
         return drinks;
     }
 
-    private static Drink addDrink(float drinkPrice, short qty) {
+    private static Drink addDrink(String name, float drinkPrice, short qty) {
         Drink drink = new Drink();
+        drink.setName(name);
         drink.setPrice(drinkPrice);
         drink.setQty(qty);
         return drink;
@@ -121,14 +123,15 @@ public class TestData {
 
     private static List<PotatoFree> getPotatoFreeList() {
         List<PotatoFree> potatoFrees = new ArrayList<>();
-        potatoFrees.add(addPotato(1f, (short) 1));
-        potatoFrees.add(addPotato(1.5f, (short) 2));
-        potatoFrees.add(addPotato(2f, (short) 3));
+        potatoFrees.add(addPotato("S", 1f, (short) 1));
+        potatoFrees.add(addPotato("L", 1.5f, (short) 2));
+        potatoFrees.add(addPotato("XL", 2f, (short) 3));
         return potatoFrees;
     }
 
-    private static PotatoFree addPotato(float potatoPrice, short qty) {
+    private static PotatoFree addPotato(String size, float potatoPrice, short qty) {
         PotatoFree potatoFree = new PotatoFree();
+        potatoFree.setPotatoSize(size);
         potatoFree.setPrice(potatoPrice);
         potatoFree.setQty(qty);
         return potatoFree;

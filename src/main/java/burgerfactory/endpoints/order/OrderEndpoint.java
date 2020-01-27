@@ -17,11 +17,6 @@ public class OrderEndpoint {
     @Autowired
     private OrderFacade orderFacade;
 
-    @GetMapping("/")
-    public String getOrderPage() {
-        return "/orderPage";
-    }
-
     @GetMapping("/getInvoice")
     public String getInvoice(Model model, @ModelAttribute("invoice") OrderDto invoice, Principal principal) {
         model.addAttribute("invoice", orderFacade.getInvoice(invoice));
